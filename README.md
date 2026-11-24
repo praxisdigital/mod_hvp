@@ -57,7 +57,7 @@ Settings can be found at: Site Administration -> Plugins -> Activity Modules -> 
 
 ## Change log
 
-### Build 2026012202
+### Build 2026112400
 
 * Invalid H5P requests on Moodle 5.2 show the intended Moodle error instead of a PHP fatal error.
 * The editor loads icons for installed content types without a missing-property warning.

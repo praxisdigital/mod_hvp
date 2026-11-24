@@ -63,7 +63,7 @@ class editor_ajax implements \H5PEditorAjaxInterface {
             AND hl1.major_version = hl2.major_version
             GROUP BY hl2.machine_name, hl2.major_version";
 
-        return $DB->get_records_sql("
+        $libraries = $DB->get_records_sql("
             SELECT hl4.id, hl4.machine_name, hl4.title, hl4.major_version,
                 hl4.minor_version, hl4.patch_version, hl4.has_icon, hl4.restricted
             FROM {hvp_libraries} hl4
@@ -72,6 +72,13 @@ class editor_ajax implements \H5PEditorAjaxInterface {
             AND hl4.major_version = hl3.major_version
             AND hl4.minor_version = hl3.minor_version"
         );
+
+        // Installed Moodle libraries use major.minor folders. The editor needs this flag for icon URLs.
+        foreach ($libraries as $library) {
+            $library->patch_version_in_folder_name = false;
+        }
+
+        return $libraries;
     }
 
     /**

@@ -55,6 +55,14 @@ In Moodle, go to administrator -> plugin overview, and press 'Update database'.
 ## Settings
 Settings can be found at: Site Administration -> Plugins -> Activity Modules -> H5P
 
+## Change log
+
+### Build 2026012202
+
+* Invalid H5P requests on Moodle 5.2 show the intended Moodle error instead of a PHP fatal error.
+* The editor loads icons for installed content types without a missing-property warning.
+* Activity and embed pages report missing H5P content or a missing main library before loading assets, avoiding PHP warnings.
+
 ## Contributing
 Feel free to contribute by:
 * Submitting translations to the [Moodle AMOS translator](https://lang.moodle.org/local/amos/view.php)

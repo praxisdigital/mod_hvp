@@ -50,6 +50,10 @@ class view_assets {
         $this->course      = $course;
         $this->core        = framework::instance();
         $this->content     = $this->core->loadContent($cm->instance);
+        if ($this->content === null) {
+            throw new \moodle_exception('invalidhvp', 'mod_hvp');
+        }
+
         $this->settings    = hvp_get_core_assets(\context_module::instance($cm->id));
         $this->jsrequires  = [];
         $this->cssrequires = [];
@@ -334,15 +338,6 @@ class view_assets {
                  " title=\"{$title}\">" .
                  "</iframe>" .
                  "</div>";
-        }
-    }
-
-    /**
-     * Checks if content is valid, prints an error if not
-     */
-    public function validatecontent() {
-        if ($this->content === null) {
-            print_error('invalidhvp', 'mod_hvp');
         }
     }
 

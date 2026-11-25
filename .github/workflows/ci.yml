@@ -2,14 +2,14 @@ name: Moodle CI
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [ opened, reopened, synchronize ]
   push:
     branches:
       - main
       - master
       - MOODLE_*_STABLE
   issue_comment:
-    types: [created]
+    types: [created ]
   workflow_dispatch:
 
 permissions:
@@ -21,5 +21,8 @@ permissions:
 
 jobs:
   ci:
-    uses: praxisdigital/moodle-test-action/.github/workflows/ci.yml@master
+    uses: praxisdigital/moodle-test-action/.github/workflows/ci.yml@mma_GH-behatWithSubmoduels
     secrets: inherit
+    with:
+      action_ref: 'mma_GH-behatWithSubmoduels'
+      behat_on_pull_request: 'true'

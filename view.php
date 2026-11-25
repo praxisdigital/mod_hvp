@@ -30,11 +30,11 @@ $id = required_param('id', PARAM_INT);
 // Verify course context.
 $cm = get_coursemodule_from_id('hvp', $id);
 if (!$cm) {
-    print_error('invalidcoursemodule');
+    throw new \moodle_exception('invalidcoursemodule');
 }
 $course = $DB->get_record('course', array('id' => $cm->course));
 if (!$course) {
-    print_error('coursemisconf');
+    throw new \moodle_exception('coursemisconf');
 }
 require_course_login($course, true, $cm);
 $context = context_module::instance($cm->id);
@@ -43,7 +43,6 @@ require_capability('mod/hvp:view', $context);
 // Set up view assets.
 $view    = new \mod_hvp\view_assets($cm, $course);
 $content = $view->getcontent();
-$view->validatecontent();
 
 // Configure page.
 $PAGE->set_url(new \moodle_url('/mod/hvp/view.php', array('id' => $id)));

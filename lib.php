@@ -52,8 +52,6 @@ function hvp_supports($feature) {
             return true;
         case FEATURE_GROUPINGS:
             return true;
-        case FEATURE_GROUPMEMBERSONLY:
-            return true;
         case FEATURE_MOD_INTRO:
             return true;
         case FEATURE_COMPLETION_TRACKS_VIEWS:
@@ -515,4 +513,3 @@ function mod_hvp_core_calendar_provide_event_action(calendar_event $event, actio
             true
     );
 }
-

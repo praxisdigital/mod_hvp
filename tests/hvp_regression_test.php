@@ -21,16 +21,30 @@ defined('MOODLE_INTERNAL') || die();
 // @codeCoverageIgnoreEnd
 
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversFunction;
 
 /**
- * Regression tests for editor icons and missing activity content.
+ * Regression tests for activity features, editor icons, and missing content.
  *
  * @package    mod_hvp
  * @license    https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 #[CoversClass(editor_ajax::class)]
 #[CoversClass(view_assets::class)]
+#[CoversFunction('hvp_supports')]
 final class hvp_regression_test extends \advanced_testcase {
+    /** Tests that supported group features remain enabled without declaring the retired feature. */
+    public function test_supports_current_group_features(): void {
+        global $CFG;
+
+        require_once($CFG->dirroot . '/mod/hvp/lib.php');
+
+        // Moodle 5.3 checks the retired feature by its string name during plugin installation.
+        $this->assertNull(hvp_supports('groupmembersonly'));
+        $this->assertTrue(hvp_supports(FEATURE_GROUPS));
+        $this->assertTrue(hvp_supports(FEATURE_GROUPINGS));
+    }
+
     /** Tests that the editor uses the installed library's major.minor folder for its icon. */
     public function test_editor_lists_local_library_icon(): void {
         global $DB;
